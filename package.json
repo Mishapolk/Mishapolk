@@ -1,0 +1,12 @@
+{
+  "name": "futuristic-portfolio",
+  "version": "1.0.0",
+  "description": "A futuristic portfolio website with cutting-edge effects",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx live-server"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  }
+}

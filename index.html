@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Futuristic Portfolio</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <canvas id="bg-canvas"></canvas>
+
+    <header>
+        <nav class="cyber-nav">
+            <div class="logo">PORT<span>FOLIO</span></div>
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#projects" class="nav-link">Projects</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero-section">
+            <div class="hero-content">
+                <h1 class="hero-title">Hi, I'm <br><span></span></h1>
+                <div class="social-links">
+                    <a href="https://www.youtube.com/@8140." target="_blank" class="youtube-link">YouTube</a>
+                    <span class="separator">•</span>
+                    <a href="https://www.speedrun.com/users/8140" target="_blank" class="speedrun-link">Speedrun Profile</a>
+                    <span class="separator">•</span>
+                    <a href="https://discord.com/users/678325318141870101" target="_blank" class="discord-link">Discord</a>
+                    <span class="separator">•</span>
+                    <a href="https://github.com/Mishapolk" target="_blank" class="github-link">Github</a>
+                </div>
+                <div class="hero-cta">
+                    <a href="#projects" class="cta-button">
+                        <span class="button-content">View My Work</span>
+                        <span class="button-glitch"></span>
+                    </a>
+                    <a href="#contact" class="cta-button outline">
+                        <span class="button-content">Contact Me</span>
+                        <span class="button-glitch"></span>
+                    </a>
+                </div>
+            </div>
+            <div class="scroll-indicator">
+                <div class="chevron"></div>
+                <div class="chevron"></div>
+                <div class="chevron"></div>
+            </div>
+            <div class="floating-shapes"></div>
+        </section>
+
+        <section id="about" class="about-section">
+            <div class="tech-particles"></div>
+            <div class="about-grid">
+                <div class="about-content">
+                    <h2 class="section-title">About Me</h2>
+                    <div class="about-text">
+                        <p>I'm a passionate developer with a love for creating innovative digital experiences. My journey in tech has led me to explore the fascinating intersection of design and functionality.</p>
+                        <p>With a focus on modern web technologies and creative coding, I strive to push the boundaries of what's possible in web development.</p>
+                    </div>
+                    <div class="tech-stack">
+                        <h3>Technologies I Work With</h3>
+                        <div class="tech-grid">
+                            <div class="tech-item">
+                                <i class="fab fa-html5"></i>
+                                <div class="tech-name">HTML</div>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-js"></i>
+                                <div class="tech-name">JavaScript</div>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-node-js"></i>
+                                <div class="tech-name">Node.js</div>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-python"></i>
+                                <div class="tech-name">Python</div>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-css3-alt"></i>
+                                <div class="tech-name">CSS</div>
+                            </div>
+                            <div class="tech-item">
+                                <i class="fab fa-docker"></i>
+                                <div class="tech-name">Docker</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="about-stats">
+                    <div class="stat-item" data-value="83">
+                        <div class="stat-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="stat-circle-bg" cx="50" cy="50" r="45"/>
+                                <circle class="stat-circle-fill" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <div class="stat-number">83%</div>
+                        </div>
+                        <div class="stat-label">Algorithm Development</div>
+                    </div>
+                    <div class="stat-item" data-value="61">
+                        <div class="stat-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="stat-circle-bg" cx="50" cy="50" r="45"/>
+                                <circle class="stat-circle-fill" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <div class="stat-number">61%</div>
+                        </div>
+                        <div class="stat-label">Network Engineering</div>
+                    </div>
+                    <div class="stat-item" data-value="74">
+                        <div class="stat-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="stat-circle-bg" cx="50" cy="50" r="45"/>
+                                <circle class="stat-circle-fill" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <div class="stat-number">74%</div>
+                        </div>
+                        <div class="stat-label">Systems Architecture</div>
+                    </div>
+                    <div class="stat-item" data-value="59">
+                        <div class="stat-circle">
+                            <svg viewBox="0 0 100 100">
+                                <circle class="stat-circle-bg" cx="50" cy="50" r="45"/>
+                                <circle class="stat-circle-fill" cx="50" cy="50" r="45"/>
+                            </svg>
+                            <div class="stat-number">59%</div>
+                        </div>
+                        <div class="stat-label">Language Design</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects" class="projects-section">
+            <h2 class="section-title">Projects</h2>
+            <div class="projects-grid">
+                <article class="project-card">
+                    <div class="project-image">
+                        <div class="project-overlay"></div>
+                    </div>
+                    <h3>Project Alpha</h3>
+                    <p>Innovative web application with cutting-edge features</p>
+                    <div class="project-links">
+                        <a href="#" class="cyber-button">View Project</a>
+                        <a href="#" class="cyber-button">Source Code</a>
+                    </div>
+                </article>
+                <!-- More project cards -->
+            </div>
+        </section>
+
+        <section id="contact" class="contact-section">
+            <h2 class="section-title">Contact</h2>
+            <div class="contact-content">
+                <form class="contact-form">
+                    <div class="form-group">
+                        <input type="text" id="name" required>
+                        <label for="name">Name</label>
+                        <div class="cyber-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" id="email" required>
+                        <label for="email">Email</label>
+                        <div class="cyber-line"></div>
+                    </div>
+                    <div class="form-group">
+                        <textarea id="message" required></textarea>
+                        <label for="message">Message</label>
+                        <div class="cyber-line"></div>
+                    </div>
+                    <button type="submit" class="cyber-button">Send Message</button>
+                </form>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-github"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-linkedin"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="cyber-footer">
+        <p>&copy; 2024 Your Name. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.7.1/ScrollTrigger.min.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>
