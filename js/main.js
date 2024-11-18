@@ -442,33 +442,113 @@ function initializeScrollAnimations() {
             toggleActions: "play none none reverse"
         }
     });
-}
 
-// Smooth scroll
-document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-    anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        const targetId = this.getAttribute('href');
-        const targetElement = document.querySelector(targetId);
-        
-        if (targetElement) {
-            // Get the header height for offset
-            const headerHeight = document.querySelector('header').offsetHeight;
-            
-            // Calculate the target position
-            let targetPosition;
-            if (targetId === '#about') {
-                // For about section, ensure exact viewport positioning
-                targetPosition = targetElement.offsetTop - headerHeight;
-                window.scrollTo({
-                    top: targetPosition,
-                    behavior: 'smooth'
-                });
-            } else {
-                targetElement.scrollIntoView({
-                    behavior: 'smooth'
-                });
-            }
-        }
+    // Initialize tilt effect on project cards
+    VanillaTilt.init(document.querySelectorAll(".project-card"), {
+        max: 10,
+        speed: 400,
+        glare: true,
+        "max-glare": 0.3,
+        scale: 1.05
     });
-});
+
+    // Projects Conveyor Belt
+    const conveyorBelt = document.querySelector('.conveyor-belt');
+    const prevBtn = document.querySelector('.prev-btn');
+    const nextBtn = document.querySelector('.next-btn');
+    let currentPosition = 0;
+    const cardWidth = 400; // Width of each project card
+    const gap = 32; // Gap between cards (2rem = 32px)
+    const scrollAmount = cardWidth + gap;
+
+    // Simple linear scroll with constant speed
+    function smoothScroll(target) {
+        currentPosition = target;
+        conveyorBelt.style.transform = `translateX(${currentPosition}px)`;
+    }
+
+    // Navigation functions
+    function scrollNext() {
+        const maxScroll = -(conveyorBelt.scrollWidth - conveyorBelt.parentElement.clientWidth);
+        const targetPosition = Math.max(currentPosition - scrollAmount, maxScroll);
+        smoothScroll(targetPosition);
+    }
+
+    function scrollPrev() {
+        const targetPosition = Math.min(currentPosition + scrollAmount, 0);
+        smoothScroll(targetPosition);
+    }
+
+    // Event listeners
+    nextBtn.addEventListener('click', scrollNext);
+    prevBtn.addEventListener('click', scrollPrev);
+
+    // Auto-scroll functionality
+    let autoScrollInterval;
+
+    function startAutoScroll() {
+        autoScrollInterval = setInterval(() => {
+            const maxScroll = -(conveyorBelt.scrollWidth - conveyorBelt.parentElement.clientWidth);
+            if (currentPosition <= maxScroll) {
+                smoothScroll(0);
+            } else {
+                scrollNext();
+            }
+        }, 3000);
+    }
+
+    function stopAutoScroll() {
+        clearInterval(autoScrollInterval);
+    }
+
+    conveyorBelt.addEventListener('mouseenter', stopAutoScroll);
+    conveyorBelt.addEventListener('mouseleave', startAutoScroll);
+
+    // Start auto-scroll initially
+    startAutoScroll();
+
+    // Animate project cards on scroll
+    gsap.utils.toArray('.project-card').forEach((card, index) => {
+        gsap.from(card, {
+            scrollTrigger: {
+                trigger: card,
+                start: "top bottom-=100",
+                toggleActions: "play none none reverse"
+            },
+            y: 60,
+            opacity: 0,
+            duration: 1,
+            delay: index * 0.2,
+            ease: "power3.out"
+        });
+    });
+
+    // Smooth scroll
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            const targetElement = document.querySelector(targetId);
+            
+            if (targetElement) {
+                // Get the header height for offset
+                const headerHeight = document.querySelector('header').offsetHeight;
+                
+                // Calculate the target position
+                let targetPosition;
+                if (targetId === '#about') {
+                    // For about section, ensure exact viewport positioning
+                    targetPosition = targetElement.offsetTop - headerHeight;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                } else {
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                }
+            }
+        });
+    });
+}
