@@ -531,24 +531,88 @@ function initializeScrollAnimations() {
             const targetElement = document.querySelector(targetId);
             
             if (targetElement) {
-                // Get the header height for offset
-                const headerHeight = document.querySelector('header').offsetHeight;
+                const navHeight = document.querySelector('.cyber-nav').offsetHeight;
+                const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
                 
-                // Calculate the target position
-                let targetPosition;
-                if (targetId === '#about') {
-                    // For about section, ensure exact viewport positioning
-                    targetPosition = targetElement.offsetTop - headerHeight;
-                    window.scrollTo({
-                        top: targetPosition,
-                        behavior: 'smooth'
-                    });
-                } else {
-                    targetElement.scrollIntoView({
-                        behavior: 'smooth'
-                    });
-                }
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
             }
         });
     });
+
+    // Active link highlighting
+    function updateActiveLink() {
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop - document.querySelector('.cyber-nav').offsetHeight - 10;
+            const sectionBottom = sectionTop + section.offsetHeight;
+            const scrollPosition = window.pageYOffset;
+            
+            if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                const currentId = section.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${currentId}`) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    }
+
+    // Update active link on scroll
+    window.addEventListener('scroll', updateActiveLink);
+    window.addEventListener('load', updateActiveLink);
+
+    // About section skill circles
+    const circles = document.querySelectorAll('.skill-circle');
+    const animatedCircles = new Set(); // Keep track of which circles have been animated
+
+    function animateCircle(circle) {
+        if (animatedCircles.has(circle)) return; // Skip if already animated
+
+        const percent = circle.getAttribute('data-percent');
+        const radius = circle.r.baseVal.value;
+        const circumference = radius * 2 * Math.PI;
+        
+        circle.style.strokeDasharray = `${circumference} ${circumference}`;
+        circle.style.strokeDashoffset = circumference;
+        
+        // Trigger animation
+        setTimeout(() => {
+            circle.style.strokeDashoffset = circumference - (percent / 100) * circumference;
+            animatedCircles.add(circle); // Mark this circle as animated
+        }, 100);
+    }
+
+    // Intersection Observer for skill circles
+    const observeCircles = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                animateCircle(entry.target);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    circles.forEach(circle => {
+        observeCircles.observe(circle);
+    });
 }
+
+// Cryptocurrency wallet copy functionality
+document.querySelectorAll('.crypto-btn').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const wallet = this.dataset.wallet;
+        navigator.clipboard.writeText(wallet).then(() => {
+            const alert = document.getElementById('copyAlert');
+            alert.classList.add('show');
+            setTimeout(() => {
+                alert.classList.remove('show');
+            }, 2000);
+        });
+    });
+});
